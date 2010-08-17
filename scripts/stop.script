@@ -1,0 +1,16 @@
+#!/bin/sh
+
+ROOTDIR=`pwd`
+PID=$(ps ax | grep -E .*beam.*$ROOTDIR | grep -v grep | awk '{print $1}')
+
+if [ $PID ]; then
+	echo  "Stopping Erlang Web"
+	HEART_PID=$(ps ax | grep heart | grep -v beam | grep $PID | awk '{print $1}')
+	if [ $HEART_PID ]; then
+		kill $HEART_PID
+	else
+		kill $PID
+	fi
+else
+	echo "Erlang Web is not running"
+fi

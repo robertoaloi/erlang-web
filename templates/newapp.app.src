@@ -1,0 +1,6 @@
+[{application, {{app_name}},
+                        [{description, "{{app_name}} description"},
+                         {vsn, "{{app_vsn}}" },
+                         {modules, []},
+                         {registered, []},
+                         {applications, [kernel, stdlib]}]}]

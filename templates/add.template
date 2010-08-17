@@ -1,0 +1,10 @@
+{variables, 
+            [{app_name, "newapp"},
+             {app_vsn, "0.1"}]}.
+{dir, "apps/{{app_name}}/doc"}.
+{dir, "apps/{{app_name}}/ebin"}.
+{dir, "apps/{{app_name}}/include"}.
+{dir, "apps/{{app_name}}/priv"}.
+{dir, "apps/{{app_name}}/src"}.
+{template, "newapp.app.src", "apps/{{app_name}}/ebin/{{app_name}}.app"}.
+

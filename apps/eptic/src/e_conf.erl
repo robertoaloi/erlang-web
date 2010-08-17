@@ -385,7 +385,7 @@ server_root() ->
     case application:get_env(eptic, server_root) of
         undefined     -> 
 	    Eptic = filename:split(code:which(eptic)),
-	    ServerRoot = filename:join(lists:sublist(Eptic, length(Eptic)-4)),
+	    ServerRoot = filename:join(lists:sublist(Eptic, length(Eptic)-5)),
 	    application:set_env(eptic, server_root, ServerRoot),
 
 	    ServerRoot;

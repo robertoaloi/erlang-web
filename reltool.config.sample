@@ -1,0 +1,95 @@
+{sys, [
+       {lib_dirs, ["apps", "deps", "deps/erlang-web/apps"
+                  ]},
+       {rel, "sample_app", "1.0",
+        [
+         %% Required applications
+
+         kernel,
+         stdlib,
+         sasl,
+         xmerl,
+         crypto,
+         syntax_tools,
+         mnesia,
+         compiler,
+         ssl,
+         runtime_tools,
+         inets,
+         eptic,
+         ewts,
+         ewgi,
+         erlydtl,
+         wpart,
+         wparts,
+         
+         %% Project specific applications
+         
+        ]},
+       {boot_rel, "sample_app"},
+       {profile, embedded},
+       
+       {app, sasl, [{incl_cond, include}]},
+       {app, crypto, [{incl_cond, include}]},
+       {app, syntax_tools, [{incl_cond, include}]},
+       {app, mnesia, [{incl_cond, include}]},
+       {app, compiler, [{incl_cond, include}]},
+       {app, ssl, [{incl_cond, include}]},
+       {app, runtime_tools, [{incl_cond, include}]},
+       {app, inets, [{incl_cond, include}]},
+       {app, eptic, [{incl_cond, include}]},
+       {app, ewts, [{incl_cond, include}]},
+       {app, ewgi, [{incl_cond, include}]},
+       {app, erlydtl, [{incl_cond, include}]},
+       {app, wpart, [{incl_cond, include}]},
+       {app, wparts, [{incl_cond, include}]},
+       {app, xmerl, [{incl_cond, include}]},
+      
+       %% Project specific applications
+
+      ]}.
+
+{target_dir, "rel"}.
+
+{overlay, [
+           %% Create directories
+           
+           {mkdir, "config"},
+           {mkdir, "docroot/conf"},
+           {mkdir, "log"},
+           {mkdir, "pipes"},
+           {mkdir, "bin"},
+           {mkdir, "lib"},
+           {mkdir, "releases/1.0"},
+
+           %% Copy neaded files
+
+           {copy, "deps/erlang-web/scripts/start.script", "bin/start"},
+           {copy, "deps/erlang-web/scripts/connect.script", "bin/connect"},
+           {copy, "deps/erlang-web/scripts/stop.script", "bin/stop"},
+           {copy, "deps/erlang-web/scripts/start_interactive.script", "bin/start_interactive"},
+           {copy, "deps/erlang-web/scripts/start_erl.script", "bin/start_erl"},
+           {copy, "deps/erlang-web/scripts/sys.config", "releases/1.0/sys.config"},
+           {copy, "deps/erlang-web/scripts/dispatch.conf.script", "config/dispatch.conf"},
+           {copy, "deps/erlang-web/scripts/project.conf.script", "config/project.conf"},
+           {copy, "deps/erlang-web/scripts/errors.conf.script", "config/errors.conf"},
+           {copy, "deps/erlang-web/scripts/templates", "templates"},
+           
+           {mkdir, "templates/cache"},
+           
+           {copy, "deps/erlang-web/apps/eptic/priv/yaws.conf", "config/yaws.conf"},
+           {copy, "deps/erlang-web/apps/eptic/priv/inets.conf", "config/inets.conf"},
+           {copy, "deps/erlang-web/apps/eptic/priv/inets_https.conf",
+                  "config/inets_https.conf"},
+           {copy, "deps/erlang-web/apps/eptic/priv/ewgi_inets.conf", 
+                  "config/ewgi_inets.conf"},
+           {copy, "deps/erlang-web/apps/eptic/priv/ewgi_inets_https.conf",
+                  "config/ewgi_inets_https.conf"},
+           {copy, "deps/erlang-web/apps/eptic/priv/errors.conf",
+                  "config/errors_description.conf"},
+           {copy, "deps/erlang-web/apps/eptic/priv/mime.types", 
+                  "docroot/conf/mime.types"},
+
+           %% Project specific configuration files and templates
+
+           ]}.

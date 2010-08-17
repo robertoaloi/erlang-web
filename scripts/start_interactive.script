@@ -1,0 +1,55 @@
+#!/bin/sh
+
+if [ $# -eq 0 ]
+    then
+        SERVER=inets
+        NODE_TYPE=single_node
+    elif [ $# -eq 1 ]
+    then
+        case $1 in
+        yaws)
+            SERVER=yaws
+            ;;
+        ewgi_mochiweb)
+            SERVER=ewgi_mochiweb
+            ;;
+        ewgi_inets)
+            SERVER=ewgi_inets
+            ;;
+        *)
+            SERVER=inets
+        esac
+        NODE_TYPE=single_node
+        shift
+    else
+        case $1 in
+        yaws)
+            SERVER=yaws
+            ;;
+        ewgi_mochiweb)
+            SERVER=ewgi_mochiweb
+            ;;
+        ewgi_inets)
+            SERVER=ewgi_inets
+            ;;
+        *)
+            SERVER=inets
+        esac
+        case $2 in
+        frontend)
+            NODE_TYPE=frontend
+            ;;
+        backend)
+            NODE_TYPE=backend
+            ;;
+        single_node_with_cache)
+            NODE_TYPE=single_node_with_cache
+            ;;
+        *)
+            NODE_TYPE=single_node
+        esac
+        shift
+        shift
+    fi
+
+    erl -pa lib/*/ebin -s e_start start $NODE_TYPE $SERVER $@

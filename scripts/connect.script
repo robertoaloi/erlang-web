@@ -1,0 +1,3 @@
+#!/bin/sh
+
+bin/to_erl pipes/
