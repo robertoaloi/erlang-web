@@ -154,7 +154,7 @@ fe_dispatch(Url) ->
 error_page(Nr) ->
     case ets:lookup(?MODULE, {error, Nr}) of
 	[{{error, Nr}, Path}] ->
-	    Path;
+	    filename:join(e_conf:server_root(), Path);
 	[] ->
 	    not_found
     end.
@@ -215,7 +215,7 @@ parser({dynamic, delegate, Prefix, Filename, Options}, _Compiled) ->
 			      proplists:delete(named_subpatterns, Opts)]}
 		    end
 	    end,
-    lists:map(Adder, load(Filename));
+    lists:map(Adder, load(filename:join(e_conf:server_root(),Filename)));
 parser({dynamic, Regexp, ModFun, Options} = Org, Compiled) -> 
     case get_all_names(Regexp, Compiled) of
 	[] -> 

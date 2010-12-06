@@ -92,7 +92,4 @@ view(View) ->
 
 -spec(template_file/1 :: (string()) -> string()).	     
 template_file(View) ->
-    filename:join([
-		   e_conf:template_root(),
-		   e_mod_gen:sanitize_file_name(View)
-		  ]).
+	e_mod_gen:sanitize_file_name(View).

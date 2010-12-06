@@ -43,7 +43,7 @@ read_file(File, Expander) ->
         true ->
             File;
         false ->
-            filename:join([e_conf:template_root(), File])
+            filename:join([e_conf:server_root(), e_conf:template_root(), File])
     end,
 
     case valid_cache(Filename) of

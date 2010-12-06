@@ -189,16 +189,11 @@ restore_session(Cookie) ->
 %%
 %% @spec template_file(Path :: string()) -> FullPath :: string()
 %% @doc Returns the full path to the requested template.
-%% The returned path is sanitized and prefixed with the template root
-%% directory.
-%% @see e_conf:template_root/0
+%% The returned path is sanitized
 %%
 -spec(template_file/1 :: (string()) -> string()).	     
 template_file(View) ->
-    filename:join([
-		   e_conf:template_root(),
-		   sanitize_file_name(View)
-		  ]).
+	sanitize_file_name(View).
 
 %% @hidden
 -spec(parse_url/1 :: (string()) -> {view, string()} | {atom(), atom(), string()} | {error, invalid_url}).
