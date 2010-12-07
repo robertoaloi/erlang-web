@@ -125,6 +125,9 @@ zip_get([],[],_,Acc)->
 zip_get([{collection, _}|T1],[H2|T2], POST, Acc) ->
     In = proplists:get_all_values(H2,POST),
     zip_get(T1,T2,POST,[In|Acc]);
+zip_get([{expdate, _}|T1],[H2|T2], POST, Acc) ->
+	[Month, Year] = proplists:get_all_values(H2, POST),
+    zip_get(T1,T2,POST,[[Month, Year]|Acc]);
 zip_get([{password, _}|T1], [H2|T2], POST, Acc) ->
     case proplists:get_all_values(H2, POST) of
 	[_, _] = Val ->
